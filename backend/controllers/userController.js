@@ -83,7 +83,8 @@ const logOutUser = asyncHandler(async (req, res) => {
 // @access Private
 
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'User profile' });
+  const user = req.user; // req.user is set in the authenticate middleware
+  res.status(200).json({ message: 'User profile fetched', data: user });
 });
 
 // @desc Update user profile
