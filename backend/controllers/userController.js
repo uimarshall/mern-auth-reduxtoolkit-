@@ -9,7 +9,25 @@ import generateToken from '../utils/generateToken.js';
 // @access Public
 
 const authUser = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'User Authenticated' });
+  const { email, password } = req.body;
+  // Check if email and password is entered in by user
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Please enter email and password');
+  }
+
+  // Find user in database
+  const user = await User.findOne({ email }).select('+password');
+  if (user && (await user.matchPassword(password))) {
+    generateToken(res, user._id);
+    res.status(201).json({
+      message: 'User Authenticated',
+      data: user,
+    });
+  } else {
+    res.status(400);
+    throw new Error('Invalid email or password');
+  }
 });
 
 // @desc Register a new user
