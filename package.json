@@ -1,0 +1,33 @@
+{
+  "name": "mern-auth-reduxtoolkit-",
+  "version": "1.0.0",
+  "description": "This repository is for the implementation of authentication using mongoose to interact with the Mongodb, express React, Redux toolkit and NodeJs.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uimarshall/mern-auth-reduxtoolkit-.git"
+  },
+  "keywords": [],
+  "author": "Marshall Akpan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uimarshall/mern-auth-reduxtoolkit-/issues"
+  },
+  "homepage": "https://github.com/uimarshall/mern-auth-reduxtoolkit-#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
