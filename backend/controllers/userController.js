@@ -92,7 +92,25 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access Private
 
 const updateUserProfile = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: 'User profile updated' });
+  const user = await User.findById(req.user._id); //we find the authenticated user by id and update the user
+
+  if (user) {
+    user.name = req.body.name || user.name; //if the user wants to update the name, we will update the user's name or we leave the name it as it is.
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      // if the user wants to update the password, we will hash the new password and update the user's password
+      user.password = req.body.password;
+    }
+    const updatedUser = await user.save();
+    // generateToken(res, updatedUser._id);
+    res.status(200).json({
+      message: 'User profile updated',
+      data: updatedUser,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
 });
 
 export {
