@@ -5,6 +5,7 @@ import { notFound, errorHandler } from './middlewares/errorMiddleware.js';
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // to parse the url encoded data and also enable us to send form data
 
 // Route middleware
 
