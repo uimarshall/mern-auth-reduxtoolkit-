@@ -1,8 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/user.js';
+import generateToken from '../utils/generateToken.js';
 
 // asyncHandler is a function that takes an express route handler and wraps it in a way that any errors that occur inside the route handler are passed to the next() function. This way, we don't have to use try/catch blocks in our route handlers, but instead, we can use a single error handling middleware at the end of the middleware chain.
-User.find({});
 
 // @desc Auth user & set token
 // @route POST /api/v1/users/auth
@@ -33,9 +33,13 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
+    const { _id, name, email } = user;
+    generateToken(res, user._id);
     res.status(201).json({
       success: true,
-      data: user,
+      _id,
+      name,
+      email,
     });
   } else {
     res.status(400);

@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
       required: true,
+      trim: true, // trim whitespace
     },
     email: {
       type: String,
@@ -15,6 +16,7 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: true,
+      select: false, // do not return the password when fetching a user
     },
   },
   { timestamps: true }
