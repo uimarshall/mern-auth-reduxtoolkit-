@@ -1,10 +1,11 @@
 import Header from './components/Header';
+import HomePage from './pages/HomePage';
 
 const App = () => {
   return (
     <div>
       <Header />
-      <h1>My app is here</h1>
+      <HomePage />
     </div>
   );
 };
