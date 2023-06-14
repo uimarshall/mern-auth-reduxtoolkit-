@@ -1,15 +1,41 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react';
 import { Button, Form, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
+
+// useDispatch is a hook provided by react-redux that allows us to dispatch actions. useSelector is another hook that allows us to extract or select data from the Redux store state. We will use these hooks to dispatch the login action and to get the userLogin state from the Redux store.
+import { useDispatch, useSelector } from 'react-redux';
+import { useLoginMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+  // Get user data
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [navigate, userInfo]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log('submit');
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res.data }));
+      navigate('/');
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
   };
 
   return (
