@@ -1,4 +1,5 @@
 import { Container, Card, Button } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Hero = () => {
   return (
@@ -14,12 +15,16 @@ const Hero = () => {
             NodeJs. It stores JWT in an HTTP-Only cookie.
           </p>
           <div className="d-flex">
-            <Button variant="primary" href="/login" className="me-3">
-              Sign In
-            </Button>
-            <Button variant="secondary" href="/register" className="me-3">
-              Register
-            </Button>
+            <LinkContainer to="/login">
+              <Button variant="primary" href="/login" className="me-3">
+                Sign In
+              </Button>
+            </LinkContainer>
+            <LinkContainer to="/register">
+              <Button variant="secondary" href="/register" className="me-3">
+                Register
+              </Button>
+            </LinkContainer>
           </div>
         </Card>
       </Container>
