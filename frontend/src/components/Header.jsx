@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, NavDropdown, Badge } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
@@ -40,7 +40,6 @@ const Header = () => {
                   </LinkContainer>
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
-                    {/* <LinkContainer to="/logout"></LinkContainer> */}
                   </NavDropdown.Item>
                 </NavDropdown>
               </>
